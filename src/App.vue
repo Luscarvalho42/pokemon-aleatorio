@@ -1,43 +1,35 @@
 <template>
-  <div class="container mx-auto">
-    <img :alt="{sprite}" :src=sprite />
-    <h3>{{ nomePokemon }}</h3>
+  <div class="h-screen flex-row bg-gray-50">
+    <h1 class="text-center ">GERADOR DE POKÉMON ALEATÓRIO</h1>
+    <CardPokemon :listaPokemons="listaPokemons" v-if="carregou" />
   </div>
 </template>
 
 <script>
-import Pokemon from './services/pokemons'
+import CardPokemon from './components/CardPokemon.vue'
 
 export default {
   data() {
     return {
-      sprite: '',
-      nomePokemon: ''
+      listaPokemons: [],
+      bgColor: '',
+      carregou: false
     }
   },
   name: 'App',
   mounted() {
-    Pokemon.listar('https://pokeapi.co/api/v2/pokedex/2/')
-      .then(({ request }) => {
-        let listaPokemon = (JSON.parse(request.response).pokemon_entries)
-        let numPokemonEscolhido = Math.floor(Math.random() * listaPokemon.length)
-        let pokemonEscolhido = listaPokemon[numPokemonEscolhido]
-        this.nomePokemon = pokemonEscolhido.pokemon_species.name
-
-        let posPokedex = pokemonEscolhido.entry_number
-        Pokemon.getPokemon('https://pokeapi.co/api/v2/pokemon/' + posPokedex)
-          .then(({ request }) => {
-            this.sprite = JSON.parse(request.response).sprites.front_default
-          })
+    fetch('https://pokeapi.co/api/v2/pokedex/1/')
+      .then(response => {
+        return response.json()
       })
-    
-    
+      .then(({pokemon_entries}) => {
+        this.listaPokemons = pokemon_entries
+        this.carregou = true
+      })
   },
   components: {
+    CardPokemon
   },
   
 }
 </script>
-
-<style>
-</style>

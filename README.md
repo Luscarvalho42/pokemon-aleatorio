@@ -1,24 +1,14 @@
-# pokemon-aleatorio
+# Gerador de pokémon aleatório :feet:
 
-## Project setup
-```
-yarn install
-```
+![Exemplo](gif-exemplo.gif)
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+## Tecnologias pricipais
+- Vue.js: https://br.vuejs.org/
+- Tailwindcss: https://tailwindcss.com/
 
-### Compiles and minifies for production
+## Como testar
+
 ```
-yarn build
+npm install
 ```
 
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
